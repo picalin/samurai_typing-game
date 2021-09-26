@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScriptの練習</title>
+    <style>
+      .screenBlue {
+        height: 100vh;
+        color: #fff;
+        font-size: 5em;
+        text-align: center;
+        background-color: #88f;
+      }
+      .screenRed {
+        height: 100vh;
+        color: #fff;
+        font-size: 5em;
+        text-align: center;
+        background-color: #f88;
+      }
+      .pagetop {
+        display: none;
+        
+        padding:40px 10px;
+        background-color: #fff;
+        color: #000;
+        text-decoration: none;
+        border-radius: 50%;
+        
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+      }
+      .pagetop:hover {
+        background-color: #ddd;
+        cursor: pointer;
+        }
+    </style>
+  </head>
+    <body>
+      <div class="screenBlue">ここがトップページです</div>
+      <div class="screenRed">2ページ目</div>
+      <div class="screenBlue">3ページ目</div>
+      <div class="screenRed">4ページ目</div>
+      <div class="screenBlue">5ページ目</div>
+      
+      <a class="pagetop" id="top">TOPに戻る</a>
+      
+      <script>
+        const topLink = document.getElementById("top");
+        let scrollValue;
+    
+        window.addEventListener("scroll", () => {
+          scrollValue = document.scrollingElement.scrollTop;
+    
+          if (scrollValue >= 300) {
+    
+              topLink.style.display = "inline";
+    
+          } else if (scrollValue < 300) {
+    
+              topLink.style.display = "none";
+    
+          }
+          console.log(scrollValue);
+        });
+                
+        //画面トップに戻る際にアニメーションさせる
+        topLink.addEventListener("click", () => {
+          
+          //一定の間隔で繰り返し処理する
+          const timer = setInterval(() => {
+            if (scrollValue < 0) clearInterval(timer);//トップに戻ったらタイマーをリセット
+            
+            document.scrollingElement.scrollTop = scrollValue;
+            scrollValue = scrollValue - 50; //スクロール量を10ずつ減らしていく
+          });
+        });
+      </script>
+    </body>
+</html>

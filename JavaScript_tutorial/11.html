@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>11章 非同期処理とAjax</title>
+  </head>
+    <body>
+      <script>
+      // 1つ目のPromise処理
+        const promise1 = () => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve('1つ目の処理が完了');
+            }, 2000);
+          });
+        };
+    
+        // 2つ目のPromise処理
+        const promise2 = () => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve('2つ目の処理が完了');
+            }, 2000);
+          });
+        };
+    
+        // 3つ目のPromise処理
+        const promise3 = () => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve('3つ目の処理が完了');
+            }, 2000);
+          });
+        }
+        ;
+        const promise4 = () => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve('4つ目の処理が完了');
+            }, 2000);
+          });
+        };
+        
+        promise1()
+        
+        .then(data => {
+          console.log(data);
+          return promise2();
+        })
+        
+        .then(data => {
+          console.log(data);
+          return promise3();
+        })
+        
+        .then(data => {
+          console.log(data);
+          return promise4();
+        })
+        
+        .then(data => console.log(data));
+      </script>
+    </body>
+</html>

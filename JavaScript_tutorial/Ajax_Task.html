@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>11章 非同期処理とAjax　課題</title>
+  </head>
+    <body>
+      <h1>JavaScript関連のリポジトリ総数 by GitHub</h1>
+      
+      <button id="btn">更新</button>
+      <div id="number"><h2>Total Number of Repositories is ????!</h2></div>
+      
+      <script>
+        const url = "https://api.github.com/search/repositories?q=javascript";
+        const btn = document.getElementById("btn");
+        const number = document.getElementById("number");
+        
+        const createNumber = item => {
+          const h2 = document.createElement('h2');
+          h2.textContent = 'Total Number of Repositories is ' + item.total_count + '!';
+          number.appendChild(h2);
+        };
+        
+        btn.addEventListener('click', () => {
+          number.innerHTML = '';
+          
+          fetch(url)
+          .then(data => data.json()) //JSONデータとして取得する
+          .then(data => {
+            createNumber(data);
+            console.log(data);
+          });
+        });
+        
+
+       
+      </script>
+    </body>
+</html>
